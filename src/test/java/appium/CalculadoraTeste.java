@@ -43,7 +43,7 @@ public class CalculadoraTeste {
 		
 		String result = driver.findElement(By.id("com.android.calculator2:id/result")).getText();
 		
-		System.out.println(result);
+		//System.out.println(result);
 		assertEquals("4", result);
 	}
 	
