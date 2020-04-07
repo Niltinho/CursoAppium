@@ -84,7 +84,7 @@ public class FormularioTeste {
 	
 	@After
 	public void tearDown() {
-		DriverFactory.killDriver();
+		//DriverFactory.killDriver();
 	}
 
 }
