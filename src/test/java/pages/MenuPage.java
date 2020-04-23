@@ -1,13 +1,15 @@
 package pages;
 
-import support.DSL;
+import support.BasePage;
 
-public class MenuPage {
-	
-	private DSL dsl = new DSL();
+public class MenuPage extends BasePage {
 	
 	public void acessarFormulario() {
-		dsl.clicarPorTexto("Formulário");
+		clicarPorTexto("Formulário");
+	}
+	
+	public void acessarSplash() {
+		clicarPorTexto("Splash");
 	}
 
 }

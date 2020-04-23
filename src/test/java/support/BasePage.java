@@ -1,8 +1,12 @@
 package support;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 
-public class DSL {
+import io.appium.java_client.MobileElement;
+
+public class BasePage {
 	
 	public void escreverCampo(By by, String nome) {
 		DriverFactory.getDriver().findElement(by).sendKeys(nome);
@@ -27,6 +31,10 @@ public class DSL {
 	
 	public boolean isCheckMarcado(By by) {
 		return DriverFactory.getDriver().findElement(by).getAttribute("checked").equalsIgnoreCase("true");
-	} 
+	}
 	
+	public boolean existeElementoPorTexto(String texto) {
+		List<MobileElement> elementos = DriverFactory.getDriver().findElements(By.xpath("//*[@text='"+ texto +"']"));
+		return elementos.size() > 0;
+	}
 }

@@ -4,27 +4,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.net.MalformedURLException;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import pages.FormularioPage;
 import pages.MenuPage;
+import support.BaseTest;
 import support.DriverFactory;
 
-public class FormularioTeste {
+public class FormularioTeste extends BaseTest {
 
 	private MenuPage menuPage = new MenuPage();
 	private FormularioPage formPage = new FormularioPage();
-	
-	@Before
-	public void setUp() throws MalformedURLException {
-	
-	menuPage.acessarFormulario();
-	}
 	
 	@Ignore
 	public void deveInstalarApp() {
@@ -38,6 +32,7 @@ public class FormularioTeste {
 			System.out.println(elemento.getText());
 		}
 		elementosEncontrados.get(1).click();*/
+		menuPage.acessarFormulario();
 		formPage.setNome("Nilton");
 		assertEquals("Nilton", formPage.obterNome());
 		System.out.println(formPage.obterNome());
@@ -45,6 +40,7 @@ public class FormularioTeste {
 	
 	@Test
 	public void deveInteragirCombo() {
+		menuPage.acessarFormulario();
 		formPage.setConsole("PS4");
 		assertEquals("PS4", formPage.obterConsole());
 		//Select comboConsole = new Select (driver.findElement(MobileBy.AccessibilityId("console")));
@@ -53,6 +49,7 @@ public class FormularioTeste {
 	
 	@Test
 	public void deveInteragirSwitchCheckBox() {
+		menuPage.acessarFormulario();
 		assertFalse(formPage.isCheckMarcado());
 		assertTrue(formPage.isSwitchMarcado());
 		
@@ -65,6 +62,7 @@ public class FormularioTeste {
 	
 	@Test
 	public void deveRealizarCadastro() {
+		menuPage.acessarFormulario();
 		formPage.setNome("Nilton");
 		formPage.setConsole("XBox One");
 		formPage.clicarCheckBox();
@@ -82,9 +80,15 @@ public class FormularioTeste {
 		assertEquals("Switch: Off", formPage.obterSwitchCadastrado());
 	}
 	
-	@After
-	public void tearDown() {
-		//DriverFactory.killDriver();
+	@Test
+	public void deveRealizarCadastroDemorado() {
+		menuPage.acessarFormulario();
+		formPage.setNome("Nilton");
+		formPage.clicarSalvar();
+		
+		WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Nome: Nilton']")));
+		
+		assertEquals("Nome: Nilton", formPage.obterNomeCadastrado());
 	}
-
 }
