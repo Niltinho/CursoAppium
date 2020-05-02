@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.appium.java_client.MobileBy;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import pages.FormularioPage;
 import pages.MenuPage;
@@ -90,5 +91,42 @@ public class FormularioTeste extends BaseTest {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Nome: Nilton']")));
 		
 		assertEquals("Nome: Nilton", formPage.obterNomeCadastrado());
+	}
+	
+	@Test
+	public void deveAlterarData() {
+		menuPage.acessarFormulario();
+		
+		formPage.clicarPorTexto("01/01/2000");
+		formPage.clicarPorTexto("2000");
+		formPage.clicarPorTexto("2001");
+		formPage.clicarProximoMes();
+		formPage.clicarProximoMes();
+		formPage.clicarPorTexto("27");
+		formPage.clicarPorTexto("OK");
+		
+		assertTrue(formPage.existeElementoPorTexto("27/4/2001"));
+	}
+	
+	@Test
+	public void deveAlterarHora() {
+		menuPage.acessarFormulario();
+		
+		formPage.clicarPorTexto("06:00");
+		formPage.clicar(MobileBy.AccessibilityId("9"));
+		formPage.clicar(MobileBy.AccessibilityId("50"));
+		formPage.clicarPorTexto("OK");
+		
+		assertTrue(formPage.existeElementoPorTexto("9:50"));
+	}
+	
+	@Test
+	public void deveInteragirComSeekBar() {
+		menuPage.acessarFormulario();
+		
+		formPage.clicarSeekBar(0.60);
+		formPage.clicarSalvar();
+		
+		assertEquals("Slider: 60", formPage.obterSliderCadastrado());
 	}
 }

@@ -1,6 +1,7 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -25,5 +26,13 @@ public class AlertTeste extends BaseTest {
 		alertPage.clicarBotaoSair();
 	}
 	
-
+	@Test
+	public void deveClicarForaAlerta() {
+		menuPage.acessarAlertas();
+		
+		alertPage.clicarAlertaSimples();
+		alertPage.aguardarElementoPorTexto("Pode clicar no OK ou fora da caixa para sair");
+		alertPage.clicarForaCaixa();
+		assertFalse(alertPage.existeElementoPorTexto("Pode clicar no OK ou fora da caixa para sair"));
+	}
 }

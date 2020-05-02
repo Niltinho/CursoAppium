@@ -25,11 +25,11 @@ public class BaseTest {
 		String arquivoPrint = "target" + File.separator +"print" + File.separator + testname.getMethodName() + "_" + Generator.dataHoraParaArquivo() + ".png";
 		Screenshot.tirar(DriverFactory.getDriver(), arquivoPrint);
 		
-		DriverFactory.getDriver().resetApp();
+		//DriverFactory.getDriver().resetApp();
 	}
 	
 	@AfterClass
 	public static void finaliza() {
-		DriverFactory.killDriver();
+		//DriverFactory.killDriver();
 	}
 }

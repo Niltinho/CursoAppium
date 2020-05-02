@@ -5,6 +5,10 @@ import support.BasePage;
 
 public class AlertPage extends BasePage {
 	
+	public void clicarAlertaSimples() {
+		clicarPorTexto("ALERTA SIMPLES");
+	}
+	
 	public void clicarAlertaConfirm() {
 		clicarPorTexto("ALERTA CONFIRM");
 	}
@@ -23,6 +27,10 @@ public class AlertPage extends BasePage {
 	
 	public void clicarBotaoSair() {
 		clicarPorTexto("SAIR");
+	}
+	
+	public void clicarForaCaixa() {
+		tap(50, 150);
 	}
 
 }
