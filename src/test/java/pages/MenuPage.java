@@ -40,5 +40,14 @@ public class MenuPage extends BasePage {
 		scrollDown();
 		clicarPorTexto("Swipe List");
 	}
+	
+	public void acessarDragNDrop() {
+		scrollDown();
+		clicarPorTexto("Drag and drop");
+	}
+	
+	public void acessarSeuBarrigaHibrido() {
+		clicarPorTexto("SeuBarriga Híbrido");
+	}
 
 }
