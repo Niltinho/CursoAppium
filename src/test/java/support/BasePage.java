@@ -11,12 +11,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
 public class BasePage {
 	
 	public void escreverCampo(By by, String nome) {
 		DriverFactory.getDriver().findElement(by).sendKeys(nome);
+	}
+	
+	public void escreverCampoPorTexto(String texto, String nome) {
+		DriverFactory.getDriver().findElement(By.xpath("//*[@text='" + texto +"']")).sendKeys(nome);
 	}
 	
 	public String obterTexto(By by) {
@@ -60,6 +65,20 @@ public class BasePage {
 		
 		int start_y = (int) (size.height * inicio);
 		int end_y = (int) (size.height * fim);
+		
+		new TouchAction<>(DriverFactory.getDriver())
+			.press(PointOption.point(x, start_y))
+			.waitAction()
+			.moveTo(PointOption.point(x, end_y))
+			.release()
+			.perform();
+	}
+	
+	public void scrollElement(WebElement element, double inicio, double fim) {
+		int x = element.getLocation().x + (element.getSize().width / 2);
+		
+		int start_y = (int) (element.getSize().height * inicio);
+		int end_y = (int) (element.getSize().height * fim);
 		
 		new TouchAction<>(DriverFactory.getDriver())
 			.press(PointOption.point(x, start_y))
@@ -114,4 +133,11 @@ public class BasePage {
 	public void swipeRight() {
 		swipe(0.1, 0.9);
 	}
+	public void clicarLongo(String elemento) {
+		MobileElement element = DriverFactory.getDriver().findElement(MobileBy.xpath("//*[@text='"+ elemento +"']"));
+		new TouchAction<>(DriverFactory.getDriver())
+		.longPress(ElementOption.element(element))
+		.perform();
+	}
+	
 }

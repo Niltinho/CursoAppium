@@ -2,8 +2,6 @@ package support;
 
 import java.io.File;
 
-import java.net.MalformedURLException;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,7 +14,7 @@ public class BaseTest {
 	public TestName testname = new TestName();
 	
 	@Before
-	public void setUp() throws MalformedURLException {
+	public void setUp() {
 	
 	}
 	
